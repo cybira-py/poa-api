@@ -10,11 +10,14 @@ import actionRoutes from './routes/actionRoutes.js';
 import indicatorRoutes from './routes/indicatorRoutes.js';
 import indicatorMetadataRoutes from './routes/indicatorMetadataRoutes.js';
 import indicatorDataRoutes from './routes/indicatorDataRoutes.js';
+import branchRoutes from './routes/branchRoutes.js';
+import unitRoutes from './routes/unitRoutes.js';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+const host = process.env.HOST || 'localhost';
 
 app.use(express.json());
 app.use('/poa', poaRoutes);
@@ -29,14 +32,9 @@ app.use('/units', unitRoutes);
 
 // Autenticación a la base de datos
 db.sequelize.authenticate()
-  .then(async () => {
+  .then(() => {
     console.log('✅ DB Connected');
-    // 👉 Crear SCHEMA si no existe
-    await db.sequelize.getQueryInterface().createSchema(process.env.SCHEMA).catch(err => {
-      if (err.original.code !== '42P06') { // 42P06 = schema already exists
-        console.error('❌ Error creating schema:', err);
-      }
-    });
+
     return db.sequelize.sync();
   })
   .then(() => {

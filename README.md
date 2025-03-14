@@ -145,7 +145,8 @@ SCHEMA=
 ## 🛠 Cómo iniciar el proyecto
 ```bash
 npm install
-npm start
+npm start      # para producción
+npm run dev    # para desarrollo con nodemon
 ```
 
 ---

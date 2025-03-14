@@ -5,10 +5,11 @@ import POA from './poa.js';
 import Objective from './objective.js';
 import Action from './action.js';
 import Indicator from './indicator.js';
+import UnitOfMeasurement from './unit_of_measurement.js';
 import IndicatorMetadata from './indicatorMetadata.js';
 import IndicatorData from './indicatorData.js';
 import Branch from './branch.js';
-import UnitOfMeasurement from './unitOfMeasurement.js';
+
 
 const dbConfig = config.development;
 
@@ -38,10 +39,12 @@ db.POA = POA(sequelize, Sequelize.DataTypes);
 db.Objective = Objective(sequelize, Sequelize.DataTypes);
 db.Action = Action(sequelize, Sequelize.DataTypes);
 db.Indicator = Indicator(sequelize, Sequelize.DataTypes);
-db.IndicatorMetadata = IndicatorMetadata(sequelize, Sequelize.DataTypes);
-db.IndicatorData = IndicatorData(sequelize, Sequelize.DataTypes);
-db.Branch = Branch(sequelize, Sequelize.DataTypes);
 db.UnitOfMeasurement = UnitOfMeasurement(sequelize, Sequelize.DataTypes);
+db.IndicatorMetadata = IndicatorMetadata(sequelize, Sequelize.DataTypes);
+db.Branch = Branch(sequelize, Sequelize.DataTypes);
+db.IndicatorData = IndicatorData(sequelize, Sequelize.DataTypes);
+
+
 
 // Associations
 db.POA.hasMany(db.Objective, { foreignKey: 'poaId' });

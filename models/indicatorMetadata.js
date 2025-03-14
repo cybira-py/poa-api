@@ -16,7 +16,7 @@ export default (sequelize, DataTypes) => {
         description: DataTypes.STRING,
         type: DataTypes.STRING,
         unit_of_measure: {
-            type: DataTypes.STRING,
+            type: DataTypes.UUID,
             references: {
                 model: 'units_of_measurement',
                 key: 'id'
