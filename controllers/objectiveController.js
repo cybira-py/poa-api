@@ -70,8 +70,7 @@ export const getObjectivesByPOA = async (req, res) => {
             as: 'metadata', // ✅ usar alias si definiste en associations
             include: [
               {
-                model: db.UnitOfMeasurement,
-                as: 'unit' // ✅ usar alias si definiste
+                model: db.UnitOfMeasurement
               }
             ]
           }
