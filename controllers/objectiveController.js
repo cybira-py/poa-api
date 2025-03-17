@@ -6,7 +6,11 @@ export const getAllObjectives = async (req, res) => {
       include: [
         db.POA,
         db.Action,
-        db.Indicator
+        {
+          model: db.IndicatorMetadata,
+          as: 'metadata',
+          include: [db.UnitOfMeasurement]
+        }
       ]
     });
     res.json(objectives);
@@ -21,7 +25,11 @@ export const getObjectiveById = async (req, res) => {
       include: [
         db.POA,
         db.Action,
-        db.Indicator
+        {
+          model: db.IndicatorMetadata,
+          as: 'metadata',
+          include: [db.UnitOfMeasurement]
+        }
       ]
     });
     if (!objective) return res.status(404).json({ error: 'Objective not found' });
@@ -36,7 +44,11 @@ export const getObjectivesByPOA = async (req, res) => {
     const poaId = req.params.poaId;
     const objectives = await db.Objective.findAll({
       where: { poaId },
-      include: [db.Action, db.Indicator]
+      include: [db.Action, {
+        model: db.IndicatorMetadata,
+        as: 'metadata',
+        include: [db.UnitOfMeasurement]
+      }]
     });
     res.json(objectives);
   } catch (error) {
