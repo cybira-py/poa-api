@@ -32,7 +32,16 @@ export default (sequelize, DataTypes) => {
     }, {
         tableName: 'indicators',
         schema: process.env.SCHEMA,
-        timestamps: false
+        timestamps: false,
+        validate: {
+            onlyOneForeignKey() {
+                const keys = [this.objectiveId, this.actionId, this.indicatorId];
+                const filled = keys.filter(k => k !== null && k !== undefined);
+                if (filled.length !== 1) {
+                    throw new Error('Debe haber exactamente UNO (y sólo uno) de: objectiveId, actionId o indicatorId');
+                }
+            }
+        }
     });
 
     return Indicator;

@@ -59,11 +59,46 @@ export const getIndicatorsByAction = async (req, res) => {
 };
 
 export const createIndicator = async (req, res) => {
+  const { indicator, metadata, unitId } = req.body;
+
   try {
-    const newIndicator = await db.Indicator.create(req.body);
-    res.status(201).json(newIndicator);
+    // Validar que la unidad de medida exista
+    const unitRecord = await db.UnitOfMeasurement.findByPk(unitId);
+    if (!unitRecord) {
+      return res.status(400).json({ error: 'Unidad de medida no existe. Debe ser creada previamente.' });
+    }
+
+    // Crear el indicador (con posible referencia a otro indicador)
+    const indicatorRecord = await db.Indicator.create({
+      objectiveId: indicator.objectiveId || null,  // <<-- este es el objetivo padre, opcional
+      actionId: indicator.actionId || null,  // <<-- este es el objetivo padre, opcional
+      indicatorId: indicator.indicatorId || null  // <<-- este es el indicador padre, opcional
+    });
+
+
+    // Crear el metadata asociado
+    const metadataRecord = await db.IndicatorMetadata.create({
+      indicatorId: indicatorRecord.id,
+      description: metadata.description,
+      type: metadata.type,
+      unit_of_measure: unitId,
+      base: metadata.base,
+      meta: metadata.meta,
+      calculation_frequency: metadata.calculation_frequency,
+      dimension: metadata.dimension,
+      dependency: metadata.dependency,
+      status: metadata.status,
+      code: metadata.code,
+      formula: metadata.formula
+    });
+
+    res.status(201).json({
+      indicator: indicatorRecord,
+      metadata: metadataRecord
+    });
+
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -86,3 +121,5 @@ export const deleteIndicator = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+
