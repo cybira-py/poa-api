@@ -7,9 +7,18 @@ export const getAllObjectives = async (req, res) => {
         db.POA,
         db.Action,
         {
-          model: db.IndicatorMetadata,
-          as: 'metadata',
-          include: [db.UnitOfMeasurement]
+          model: db.Indicator,
+          include: [
+            {
+              model: db.IndicatorMetadata,
+              as: 'metadata', // ✅ usar alias si definiste en associations
+              include: [
+                {
+                  model: db.UnitOfMeasurement
+                }
+              ]
+            }
+          ]
         }
       ]
     });
@@ -26,9 +35,18 @@ export const getObjectiveById = async (req, res) => {
         db.POA,
         db.Action,
         {
-          model: db.IndicatorMetadata,
-          as: 'metadata',
-          include: [db.UnitOfMeasurement]
+          model: db.Indicator,
+          include: [
+            {
+              model: db.IndicatorMetadata,
+              as: 'metadata', // ✅ usar alias si definiste en associations
+              include: [
+                {
+                  model: db.UnitOfMeasurement
+                }
+              ]
+            }
+          ]
         }
       ]
     });
@@ -45,9 +63,19 @@ export const getObjectivesByPOA = async (req, res) => {
     const objectives = await db.Objective.findAll({
       where: { poaId },
       include: [db.Action, {
-        model: db.IndicatorMetadata,
-        as: 'metadata',
-        include: [db.UnitOfMeasurement]
+        model: db.Indicator,
+        include: [
+          {
+            model: db.IndicatorMetadata,
+            as: 'metadata', // ✅ usar alias si definiste en associations
+            include: [
+              {
+                model: db.UnitOfMeasurement,
+                as: 'unit' // ✅ usar alias si definiste
+              }
+            ]
+          }
+        ]
       }]
     });
     res.json(objectives);
