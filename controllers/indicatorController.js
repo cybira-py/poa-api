@@ -3,7 +3,12 @@ import db from '../models/index.js';
 export const getAllIndicators = async (req, res) => {
   try {
     const indicators = await db.Indicator.findAll({
-      include: [db.Objective, db.Action, db.IndicatorMetadata, db.IndicatorData]
+      include: [
+        {
+          model: db.IndicatorMetadata,
+          include: [db.UnitOfMeasurement]
+        }
+      ]
     });
     res.json(indicators);
   } catch (error) {
@@ -15,8 +20,6 @@ export const getIndicatorById = async (req, res) => {
   try {
     const indicator = await db.Indicator.findByPk(req.params.id, {
       include: [
-        db.Objective,
-        db.Action,
         {
           model: db.IndicatorMetadata,
           include: [db.UnitOfMeasurement]
@@ -37,7 +40,12 @@ export const getIndicatorsByObjective = async (req, res) => {
     const objectiveId = req.params.objectiveId;
     const indicators = await db.Indicator.findAll({
       where: { objectiveId },
-      include: [db.Action, db.IndicatorMetadata]
+      include: [
+        {
+          model: db.IndicatorMetadata,
+          include: [db.UnitOfMeasurement]
+        }
+      ]
     });
     res.json(indicators);
   } catch (error) {
@@ -50,7 +58,12 @@ export const getIndicatorsByAction = async (req, res) => {
     const actionId = req.params.actionId;
     const indicators = await db.Indicator.findAll({
       where: { actionId },
-      include: [db.Objective, db.IndicatorMetadata]
+      include: [
+        {
+          model: db.IndicatorMetadata,
+          include: [db.UnitOfMeasurement]
+        }
+      ]
     });
     res.json(indicators);
   } catch (error) {
