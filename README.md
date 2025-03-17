@@ -78,10 +78,10 @@ SCHEMA=
 | Método | Ruta                                     | Descripción                     |
 |--------|------------------------------------------|----------------------------------|
 | GET    | `/api/indicators`                        | Todos los indicadores            |
-| GET    | `/api/indicators/:id`                    | Indicador por ID + metadata + unidad |
+| GET    | `/api/indicators/:id`                    | Indicador por ID + metadata + unidad de medida |
 | GET    | `/api/indicators/objective/:objectiveId` | Indicadores de un objetivo       |
 | GET    | `/api/indicators/action/:actionId`       | Indicadores de una acción        |
-| POST   | `/api/indicators`                        | Crear indicador                  |
+| POST   | `/api/indicators`                        | Crear indicador con su metadata y unidad de medida |
 | PUT    | `/api/indicators/:id`                    | Editar indicador                 |
 | DELETE | `/api/indicators/:id`                    | Eliminar indicador               |
 
