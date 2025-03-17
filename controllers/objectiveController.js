@@ -6,6 +6,7 @@ export const getAllObjectives = async (req, res) => {
       include: [
         db.POA,
         db.Action,
+        db.Objective,
         {
           model: db.Indicator,
           include: [
@@ -34,6 +35,7 @@ export const getObjectiveById = async (req, res) => {
       include: [
         db.POA,
         db.Action,
+        db.Objective,
         {
           model: db.Indicator,
           include: [
@@ -62,20 +64,24 @@ export const getObjectivesByPOA = async (req, res) => {
     const poaId = req.params.poaId;
     const objectives = await db.Objective.findAll({
       where: { poaId },
-      include: [db.Action, {
-        model: db.Indicator,
-        include: [
-          {
-            model: db.IndicatorMetadata,
-            as: 'metadata', // ✅ usar alias si definiste en associations
-            include: [
-              {
-                model: db.UnitOfMeasurement
-              }
-            ]
-          }
-        ]
-      }]
+      include: [
+        db.Action,
+        db.Objective,
+        {
+          model: db.Indicator,
+          include: [
+            {
+              model: db.IndicatorMetadata,
+              as: 'metadata', // ✅ usar alias si definiste en associations
+              include: [
+                {
+                  model: db.UnitOfMeasurement
+                }
+              ]
+            }
+          ]
+        }
+      ]
     });
     res.json(objectives);
   } catch (error) {
