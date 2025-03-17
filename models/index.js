@@ -53,8 +53,8 @@ db.Objective.belongsTo(db.POA, { foreignKey: 'poaId' });
 db.Objective.hasMany(db.Action, { foreignKey: 'objectiveId' });
 db.Action.belongsTo(db.Objective, { foreignKey: 'objectiveId' });
 
-db.Objective.belongsTo(db.Objective, { foreignKey: 'objective_id', as: 'parent' });
-db.Objective.hasMany(db.Objective, { foreignKey: 'objective_id', as: 'children' });
+db.Objective.belongsTo(db.Objective, { foreignKey: 'objectiveId', as: 'parent' });
+db.Objective.hasMany(db.Objective, { foreignKey: 'objectiveId', as: 'children' });
 
 
 db.Objective.hasMany(db.Indicator, { foreignKey: 'objectiveId' });
