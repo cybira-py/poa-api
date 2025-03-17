@@ -6,6 +6,7 @@ export const getAllIndicators = async (req, res) => {
       include: [
         {
           model: db.IndicatorMetadata,
+          as: 'metadata',
           include: [db.UnitOfMeasurement]
         }
       ]
@@ -22,6 +23,7 @@ export const getIndicatorById = async (req, res) => {
       include: [
         {
           model: db.IndicatorMetadata,
+          as: 'metadata',
           include: [db.UnitOfMeasurement]
         }
       ]
@@ -43,6 +45,7 @@ export const getIndicatorsByObjective = async (req, res) => {
       include: [
         {
           model: db.IndicatorMetadata,
+          as: 'metadata',
           include: [db.UnitOfMeasurement]
         }
       ]
@@ -61,6 +64,7 @@ export const getIndicatorsByAction = async (req, res) => {
       include: [
         {
           model: db.IndicatorMetadata,
+          as: 'metadata',
           include: [db.UnitOfMeasurement]
         }
       ]

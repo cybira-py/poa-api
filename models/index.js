@@ -59,7 +59,7 @@ db.Indicator.belongsTo(db.Objective, { foreignKey: 'objectiveId' });
 db.Action.hasMany(db.Indicator, { foreignKey: 'actionId' });
 db.Indicator.belongsTo(db.Action, { foreignKey: 'actionId' });
 
-db.Indicator.hasOne(db.IndicatorMetadata, { foreignKey: 'indicatorId' });
+db.Indicator.hasOne(db.IndicatorMetadata, { foreignKey: 'indicatorId', as: 'metadata' });
 db.IndicatorMetadata.belongsTo(db.Indicator, { foreignKey: 'indicatorId' });
 
 db.Indicator.hasMany(db.IndicatorData, { foreignKey: 'indicatorId' });
