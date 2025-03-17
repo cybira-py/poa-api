@@ -6,7 +6,8 @@ export const getAllObjectives = async (req, res) => {
       include: [
         db.POA,
         db.Action,
-        db.Objective,
+        { model: db.Objective, as: 'parent'},
+        { model: db.Objective, as: 'children' },
         {
           model: db.Indicator,
           include: [
@@ -35,7 +36,8 @@ export const getObjectiveById = async (req, res) => {
       include: [
         db.POA,
         db.Action,
-        db.Objective,
+        { model: db.Objective, as: 'parent' },
+        { model: db.Objective, as: 'children' },
         {
           model: db.Indicator,
           include: [
@@ -66,7 +68,8 @@ export const getObjectivesByPOA = async (req, res) => {
       where: { poaId },
       include: [
         db.Action,
-        db.Objective,
+        { model: db.Objective, as: 'parent' },
+        { model: db.Objective, as: 'children' },
         {
           model: db.Indicator,
           include: [

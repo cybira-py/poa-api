@@ -29,13 +29,14 @@ export default (sequelize, DataTypes) => {
     timestamps: false,
     validate: {
       onlyOneForeignKey() {
-        const keys = [this.poaId, this.objetive_id];
+        const keys = [this.poaId, this.objective_id]; 
         const filled = keys.filter(k => k !== null && k !== undefined);
         if (filled.length !== 1) {
-          throw new Error('Debe haber exactamente UNO (y sólo uno) de: poaId, objetive_id');
+          throw new Error('Debe haber exactamente UNO (y sólo uno) de: poaId, objective_id');
         }
       }
     }
+    
   });
 
   return Objective;
