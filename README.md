@@ -1,10 +1,11 @@
 # 📊 POA API REST - Backend
 
-API REST construida con Node.js, Express y Sequelize para gestionar el Plan Operativo Anual (POA), incluyendo Objetivos, Acciones, Indicadores, Metadatos y otras entidades relacionadas.
+API REST construida con Node.js, Express y Sequelize para gestionar el Plan Operativo Anual (POA), incluyendo Objetivos, Acciones, Indicadores, Metadatos y catálogos relacionados como sucursales, unidades de medida, dimensiones, dependencias y proyectos.
 
 ---
 
 ## 🚀 Tecnologías
+
 - Node.js
 - Express
 - Sequelize ORM
@@ -30,15 +31,19 @@ project/
 ---
 
 ## 🔐 Variables de entorno `.env`
+
 ```env
-PORT=
-DB_NAME=
-DB_HOST=
+PORT=5070
+DB_NAME=ips_v2
+DB_HOST=db.cybiraconsulting.local
 DB_PORT=5432
 DB_USER=bpm
-DB_PASSWORD=
-DB_DIALECT
-SCHEMA=
+DB_PASSWORD=cybiraconsulting
+DB_DIALECT=postgres
+SCHEMA=new_poa
+
+SSL_KEY_PATH=/ruta/ssl/main-key.pem
+SSL_CERT_PATH=/ruta/ssl/main-cert.pem
 ```
 
 ---
@@ -53,6 +58,15 @@ SCHEMA=
 | POST   | `/api/poa`        | Crear un nuevo POA              |
 | PUT    | `/api/poa/:id`    | Editar un POA                   |
 | DELETE | `/api/poa/:id`    | Eliminar un POA                 |
+
+### ▶ Projects
+| Método | Ruta              | Descripción                        |
+|--------|-------------------|-------------------------------------|
+| GET    | `/api/projects`   | Todos los proyectos                 |
+| GET    | `/api/projects/:id` | Proyecto por ID                   |
+| POST   | `/api/projects`   | Crear proyecto                      |
+| PUT    | `/api/projects/:id` | Editar proyecto                    |
+| DELETE | `/api/projects/:id` | Eliminar proyecto                  |
 
 ### ▶ Objectives
 | Método | Ruta                                | Descripción                       |
@@ -75,15 +89,15 @@ SCHEMA=
 | DELETE | `/api/actions/:id`                    | Eliminar acción                |
 
 ### ▶ Indicators
-| Método | Ruta                                     | Descripción                     |
-|--------|------------------------------------------|----------------------------------|
-| GET    | `/api/indicators`                        | Todos los indicadores            |
-| GET    | `/api/indicators/:id`                    | Indicador por ID + metadata + unidad de medida |
-| GET    | `/api/indicators/objective/:objectiveId` | Indicadores de un objetivo       |
-| GET    | `/api/indicators/action/:actionId`       | Indicadores de una acción        |
+| Método | Ruta                                     | Descripción                                         |
+|--------|------------------------------------------|----------------------------------------------------|
+| GET    | `/api/indicators`                        | Todos los indicadores                              |
+| GET    | `/api/indicators/:id`                    | Indicador por ID + metadata + unidad de medida     |
+| GET    | `/api/indicators/objective/:objectiveId` | Indicadores de un objetivo                         |
+| GET    | `/api/indicators/action/:actionId`       | Indicadores de una acción                          |
 | POST   | `/api/indicators`                        | Crear indicador con su metadata y unidad de medida |
-| PUT    | `/api/indicators/:id`                    | Editar indicador                 |
-| DELETE | `/api/indicators/:id`                    | Eliminar indicador               |
+| PUT    | `/api/indicators/:id`                    | Editar indicador                                   |
+| DELETE | `/api/indicators/:id`                    | Eliminar indicador                                 |
 
 ### ▶ Indicator Metadata
 | Método | Ruta                                        | Descripción                          |
@@ -103,34 +117,63 @@ SCHEMA=
 | PUT    | `/api/indicator-data/:id`                  | Editar data                       |
 | DELETE | `/api/indicator-data/:id`                  | Eliminar data                     |
 
-### ▶ Catálogos
+---
 
-#### Branches (Sucursales)
-| Método | Ruta              | Descripción       |
-|--------|-------------------|-------------------|
-| GET    | `/api/branches`  | Todas las sucursales |
-| POST   | `/api/branches`  | Crear sucursal     |
-| PUT    | `/api/branches/:id` | Editar sucursal  |
-| DELETE | `/api/branches/:id` | Eliminar sucursal |
+## ▶ Catálogos
 
-#### Units of Measurement
-| Método | Ruta              | Descripción              |
-|--------|-------------------|--------------------------|
-| GET    | `/api/units`     | Todas las unidades        |
-| POST   | `/api/units`     | Crear unidad              |
-| PUT    | `/api/units/:id` | Editar unidad              |
-| DELETE | `/api/units/:id` | Eliminar unidad           |
+### 🔹 Branches (Sucursales)
+| Método | Ruta               | Descripción            |
+|--------|--------------------|------------------------|
+| GET    | `/api/branches`    | Listar sucursales      |
+| POST   | `/api/branches`    | Crear sucursal         |
+| PUT    | `/api/branches/:id`| Editar sucursal        |
+| DELETE | `/api/branches/:id`| Eliminar sucursal      |
+
+### 🔹 Units of Measurement
+| Método | Ruta               | Descripción                |
+|--------|--------------------|----------------------------|
+| GET    | `/api/units`       | Listar unidades de medida  |
+| POST   | `/api/units`       | Crear unidad               |
+| PUT    | `/api/units/:id`   | Editar unidad              |
+| DELETE | `/api/units/:id`   | Eliminar unidad            |
+
+### 🔹 Dimensions
+| Método | Ruta               | Descripción                |
+|--------|--------------------|----------------------------|
+| GET    | `/api/dimensions`  | Listar dimensiones         |
+| POST   | `/api/dimensions`  | Crear dimensión            |
+| PUT    | `/api/dimensions/:id` | Editar dimensión         |
+| DELETE | `/api/dimensions/:id` | Eliminar dimensión       |
+
+### 🔹 Dependencies
+| Método | Ruta               | Descripción                |
+|--------|--------------------|----------------------------|
+| GET    | `/api/dependencies`| Listar dependencias        |
+| POST   | `/api/dependencies`| Crear dependencia          |
+| PUT    | `/api/dependencies/:id`| Editar dependencia     |
+| DELETE | `/api/dependencies/:id`| Eliminar dependencia   |
 
 ---
 
-## 📦 Ejemplo de creación de un POA (POST `/api/poa`)
+## 📦 Ejemplo de creación de un POA
+
 ```json
 {
   "description": "POA 2025 - Desarrollo Institucional"
 }
 ```
 
-## 📦 Ejemplo de creación de un Objective
+## 📦 Ejemplo de creación de un Proyecto
+
+```json
+{
+  "description": "Proyecto de mejora continua",
+  "poaId": "uuid-del-poa"
+}
+```
+
+## 📦 Ejemplo de creación de un Objetivo
+
 ```json
 {
   "description": "Mejorar atención al cliente",
@@ -143,6 +186,7 @@ SCHEMA=
 ---
 
 ## 🛠 Cómo iniciar el proyecto
+
 ```bash
 npm install
 npm start      # para producción
@@ -152,6 +196,6 @@ npm run dev    # para desarrollo con nodemon
 ---
 
 ## 🤝 Contribuciones
-- Usa PRs o reporta issues para mejorar esta API.
-- Estándar RESTful y modularización por capas.
 
+- Usa PRs o reporta issues para mejorar esta API.
+- Estándar RESTful, modularización por capas, buenas prácticas con Sequelize.

@@ -13,10 +13,17 @@ export default (sequelize, DataTypes) => {
         key: 'id'
       }
     },
+    projectId: {
+      type: DataTypes.UUID,
+      references: {
+        model: 'projects',
+        key: 'id'
+      }
+    },
     objectiveId: {
       type: DataTypes.UUID,
       references: {
-        model: 'objectives', 
+        model: 'objectives',
         key: 'id'
       }
     },
@@ -29,14 +36,14 @@ export default (sequelize, DataTypes) => {
     timestamps: false,
     validate: {
       onlyOneForeignKey() {
-        const keys = [this.poaId, this.objectiveId]; 
+        const keys = [this.poaId, this.objectiveId, this.projectId];
         const filled = keys.filter(k => k !== null && k !== undefined);
         if (filled.length !== 1) {
-          throw new Error('Debe haber exactamente UNO (y sólo uno) de: poaId, objectiveId');
+          throw new Error('Debe haber exactamente UNO (y sólo uno) de: poaId, objectiveId, projectId');
         }
       }
     }
-    
+
   });
 
   return Objective;

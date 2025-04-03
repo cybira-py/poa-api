@@ -22,10 +22,26 @@ export default (sequelize, DataTypes) => {
                 key: 'id'
             }
         },
+        dimension_id: {
+            type: DataTypes.UUID,
+            references: {
+                model: 'dimensions',
+                key: 'id'
+            }
+        },
+        dependency_id: {
+            type: DataTypes.UUID,
+            references: {
+                model: 'dependencies',
+                key: 'id'
+            }
+        },
+        formula_meta: DataTypes.STRING,
+        meta_calc: DataTypes.STRING,
+        indicator_sucursal: DataTypes.BOOLEAN,
         base: DataTypes.FLOAT,
         meta: DataTypes.FLOAT,
         calculation_frequency: DataTypes.INTEGER,
-        dimension: DataTypes.STRING,
         dependency: DataTypes.STRING,
         status: DataTypes.STRING,
         code: DataTypes.STRING,

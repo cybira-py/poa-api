@@ -12,6 +12,14 @@ import indicatorMetadataRoutes from './routes/indicatorMetadataRoutes.js';
 import indicatorDataRoutes from './routes/indicatorDataRoutes.js';
 import branchRoutes from './routes/branchRoutes.js';
 import unitRoutes from './routes/unitRoutes.js';
+import dimensionRoutes from './routes/dimensionRoutes.js';
+import dependencyRoutes from './routes/dependencyRoutes.js';
+import projectRoutes from './routes/projectRoutes.js';
+
+
+
+
+
 
 dotenv.config();
 
@@ -21,6 +29,7 @@ const host = process.env.HOST || 'localhost';
 
 app.use(express.json());
 app.use('/poa', poaRoutes);
+app.use('/projects', projectRoutes);
 app.use('/objectives', objectiveRoutes);
 app.use('/actions', actionRoutes);
 app.use('/indicators', indicatorRoutes);
@@ -28,6 +37,8 @@ app.use('/indicator-metadata', indicatorMetadataRoutes);
 app.use('/indicator-data', indicatorDataRoutes);
 app.use('/branches', branchRoutes);
 app.use('/units', unitRoutes);
+app.use('/dimensions', dimensionRoutes);
+app.use('/dependencies', dependencyRoutes);
 
 
 // Autenticación a la base de datos
