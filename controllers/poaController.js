@@ -3,7 +3,7 @@ import db from '../models/index.js';
 export const getAllPOAs = async (req, res) => {
   try {
     const poas = await db.POA.findAll({
-      include: db.Objective
+      include: [db.Objective, db.Project]
     });
     res.json(poas);
   } catch (error) {
@@ -14,7 +14,7 @@ export const getAllPOAs = async (req, res) => {
 export const getPOAById = async (req, res) => {
   try {
     const poa = await db.POA.findByPk(req.params.id, {
-      include: db.Objective
+      include: [db.Objective, db.Project]
     });
     if (!poa) return res.status(404).json({ error: 'POA not found' });
     res.json(poa);
