@@ -101,7 +101,6 @@ export const createIndicator = async (req, res) => {
     const metadataRecord = await db.IndicatorMetadata.create({
       indicatorId: indicatorRecord.id,
       description: metadata.description,
-      type: metadata.type,
       unitOfMeasure: metadata.unitOfMeasure,
       base: metadata.base,
       meta: metadata.meta,

@@ -14,7 +14,6 @@ export default (sequelize, DataTypes) => {
             }
         },
         description: DataTypes.STRING,
-        type: DataTypes.STRING,
         unitOfMeasure: {
             type: DataTypes.UUID,
             references: {
