@@ -106,11 +106,13 @@ export const createIndicator = async (req, res) => {
       base: metadata.base,
       meta: metadata.meta,
       calculationFrequency: metadata.calculationFrequency,
-      dimension: metadata.dimension,
+      dimensionId: metadata.dimensionId,
       dependency: metadata.dependency,
       status: metadata.status,
       code: metadata.code,
-      formula: metadata.formula
+      formula: metadata.formula,
+      formulaMeta: metadata.formulaMeta,
+      indicatorSucursal: metadata.indicatorSucursal,
     });
 
     res.status(201).json({
