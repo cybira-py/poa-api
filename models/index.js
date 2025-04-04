@@ -78,10 +78,10 @@ db.IndicatorMetadata.belongsTo(db.Indicator, { foreignKey: 'indicatorId' });
 db.Indicator.hasMany(db.IndicatorData, { foreignKey: 'indicatorId' });
 db.IndicatorData.belongsTo(db.Indicator, { foreignKey: 'indicatorId' });
 
-db.UnitOfMeasurement.hasMany(db.IndicatorMetadata, { foreignKey: 'unit_of_measure', sourceKey: 'id' });
-db.IndicatorMetadata.belongsTo(db.UnitOfMeasurement, { foreignKey: 'unit_of_measure', targetKey: 'id' });
+db.UnitOfMeasurement.hasMany(db.IndicatorMetadata, { foreignKey: 'unitOfMeasure', sourceKey: 'id' });  // Changed from unit_of_measure
+db.IndicatorMetadata.belongsTo(db.UnitOfMeasurement, { foreignKey: 'unitOfMeasure', targetKey: 'id' }); // Changed from unit_of_measure
 
-db.Dimension.hasMany(db.IndicatorMetadata, { foreignKey: 'dimension_id' });
-db.IndicatorMetadata.belongsTo(db.Dimension, { foreignKey: 'dimension_id' });
+db.Dimension.hasMany(db.IndicatorMetadata, { foreignKey: 'dimensionId' });  // Changed from dimension_id
+db.IndicatorMetadata.belongsTo(db.Dimension, { foreignKey: 'dimensionId' }); // Changed from dimension_id
 
 export default db;

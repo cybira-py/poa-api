@@ -15,27 +15,26 @@ export default (sequelize, DataTypes) => {
         },
         description: DataTypes.STRING,
         type: DataTypes.STRING,
-        unit_of_measure: {
+        unitOfMeasure: {
             type: DataTypes.UUID,
             references: {
                 model: 'units_of_measurement',
                 key: 'id'
             }
         },
-        dimension_id: {
+        dimensionId: {
             type: DataTypes.UUID,
             references: {
                 model: 'dimensions',
                 key: 'id'
             }
         },
-        dependency_id: DataTypes.STRING,
-        formula_meta: DataTypes.STRING,
-        meta_calc: DataTypes.STRING,
-        indicator_sucursal: DataTypes.BOOLEAN,
+        formulaMeta: DataTypes.STRING,
+        metaCalc: DataTypes.STRING,
+        indicatorSucursal: DataTypes.BOOLEAN,
         base: DataTypes.FLOAT,
         meta: DataTypes.FLOAT,
-        calculation_frequency: DataTypes.INTEGER,
+        calculationFrequency: DataTypes.INTEGER,
         dependency: DataTypes.STRING,
         status: DataTypes.STRING,
         code: DataTypes.STRING,
