@@ -5,7 +5,7 @@ import POA from './poa.js';
 import Objective from './objective.js';
 import Action from './action.js';
 import Indicator from './indicator.js';
-import UnitOfMeasurement from './unit_of_measurement.js';
+import UnitOfMeasurement from './unitOfMeasurement.js';
 import IndicatorMetadata from './indicatorMetadata.js';
 import IndicatorData from './indicatorData.js';
 import Project from './project.js';
@@ -78,8 +78,8 @@ db.IndicatorMetadata.belongsTo(db.Indicator, { foreignKey: 'indicatorId' });
 db.Indicator.hasMany(db.IndicatorData, { foreignKey: 'indicatorId' });
 db.IndicatorData.belongsTo(db.Indicator, { foreignKey: 'indicatorId' });
 
-db.UnitOfMeasurement.hasMany(db.IndicatorMetadata, { foreignKey: 'unitOfMeasure', sourceKey: 'id' });  // Changed from unit_of_measure
-db.IndicatorMetadata.belongsTo(db.UnitOfMeasurement, { foreignKey: 'unitOfMeasure', targetKey: 'id' }); // Changed from unit_of_measure
+db.UnitOfMeasurement.hasMany(db.IndicatorMetadata, { foreignKey: 'unitOfMeasure', sourceKey: 'id' });  // Changed from unitOfMeasure
+db.IndicatorMetadata.belongsTo(db.UnitOfMeasurement, { foreignKey: 'unitOfMeasure', targetKey: 'id' }); // Changed from unitOfMeasure
 
 db.Dimension.hasMany(db.IndicatorMetadata, { foreignKey: 'dimensionId' });  // Changed from dimension_id
 db.IndicatorMetadata.belongsTo(db.Dimension, { foreignKey: 'dimensionId' }); // Changed from dimension_id

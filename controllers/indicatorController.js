@@ -80,7 +80,7 @@ export const createIndicator = async (req, res) => {
 
   try {
     // Validar que la unidad de medida exista
-    const unitRecord = await db.UnitOfMeasurement.findByPk(metadata.unit_of_measure);
+    const unitRecord = await db.UnitOfMeasurement.findByPk(metadata.unitOfMeasure);
     if (!unitRecord) {
       return res.status(400).json({ error: 'Unidad de medida no existe. Debe ser creada previamente.' });
     }
@@ -98,10 +98,10 @@ export const createIndicator = async (req, res) => {
       indicatorId: indicatorRecord.id,
       description: metadata.description,
       type: metadata.type,
-      unit_of_measure: metadata.unit_of_measure,
+      unitOfMeasure: metadata.unitOfMeasure,
       base: metadata.base,
       meta: metadata.meta,
-      calculation_frequency: metadata.calculation_frequency,
+      calculationFrequency: metadata.calculationFrequency,
       dimension: metadata.dimension,
       dependency: metadata.dependency,
       status: metadata.status,
