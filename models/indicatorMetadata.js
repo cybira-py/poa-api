@@ -29,13 +29,7 @@ export default (sequelize, DataTypes) => {
                 key: 'id'
             }
         },
-        dependency_id: {
-            type: DataTypes.UUID,
-            references: {
-                model: 'dependencies',
-                key: 'id'
-            }
-        },
+        dependency_id: DataTypes.STRING,
         formula_meta: DataTypes.STRING,
         meta_calc: DataTypes.STRING,
         indicator_sucursal: DataTypes.BOOLEAN,

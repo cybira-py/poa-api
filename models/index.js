@@ -8,9 +8,7 @@ import Indicator from './indicator.js';
 import UnitOfMeasurement from './unit_of_measurement.js';
 import IndicatorMetadata from './indicatorMetadata.js';
 import IndicatorData from './indicatorData.js';
-import Branch from './branch.js';
 import Project from './project.js';
-import Dependency from './dependency.js';
 import Dimension from './dimension.js';
 
 
@@ -44,10 +42,8 @@ db.Objective = Objective(sequelize, Sequelize.DataTypes);
 db.Action = Action(sequelize, Sequelize.DataTypes);
 db.Indicator = Indicator(sequelize, Sequelize.DataTypes);
 db.UnitOfMeasurement = UnitOfMeasurement(sequelize, Sequelize.DataTypes);
-db.Dependency = Dependency(sequelize, Sequelize.DataTypes);
 db.Dimension = Dimension(sequelize, Sequelize.DataTypes);
 db.IndicatorMetadata = IndicatorMetadata(sequelize, Sequelize.DataTypes);
-db.Branch = Branch(sequelize, Sequelize.DataTypes);
 db.IndicatorData = IndicatorData(sequelize, Sequelize.DataTypes);
 
 
@@ -82,20 +78,10 @@ db.IndicatorMetadata.belongsTo(db.Indicator, { foreignKey: 'indicatorId' });
 db.Indicator.hasMany(db.IndicatorData, { foreignKey: 'indicatorId' });
 db.IndicatorData.belongsTo(db.Indicator, { foreignKey: 'indicatorId' });
 
-db.Branch.hasMany(db.IndicatorData, { foreignKey: 'branchId' });
-db.IndicatorData.belongsTo(db.Branch, { foreignKey: 'branchId' });
-
 db.UnitOfMeasurement.hasMany(db.IndicatorMetadata, { foreignKey: 'unit_of_measure', sourceKey: 'id' });
 db.IndicatorMetadata.belongsTo(db.UnitOfMeasurement, { foreignKey: 'unit_of_measure', targetKey: 'id' });
 
 db.Dimension.hasMany(db.IndicatorMetadata, { foreignKey: 'dimension_id' });
 db.IndicatorMetadata.belongsTo(db.Dimension, { foreignKey: 'dimension_id' });
-
-db.Dependency.hasMany(db.IndicatorMetadata, { foreignKey: 'dependency_id' });
-db.IndicatorMetadata.belongsTo(db.Dependency, { foreignKey: 'dependency_id' });
-
-db.Dependency.belongsTo(db.Dependency, { foreignKey: 'parent', as: 'parentDependency' });
-db.Dependency.hasMany(db.Dependency, { foreignKey: 'parent', as: 'childDependencies' });
-
 
 export default db;

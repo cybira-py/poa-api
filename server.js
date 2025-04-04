@@ -10,10 +10,8 @@ import actionRoutes from './routes/actionRoutes.js';
 import indicatorRoutes from './routes/indicatorRoutes.js';
 import indicatorMetadataRoutes from './routes/indicatorMetadataRoutes.js';
 import indicatorDataRoutes from './routes/indicatorDataRoutes.js';
-import branchRoutes from './routes/branchRoutes.js';
 import unitRoutes from './routes/unitRoutes.js';
 import dimensionRoutes from './routes/dimensionRoutes.js';
-import dependencyRoutes from './routes/dependencyRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
 
 
@@ -35,10 +33,9 @@ app.use('/actions', actionRoutes);
 app.use('/indicators', indicatorRoutes);
 app.use('/indicator-metadata', indicatorMetadataRoutes);
 app.use('/indicator-data', indicatorDataRoutes);
-app.use('/branches', branchRoutes);
 app.use('/units', unitRoutes);
 app.use('/dimensions', dimensionRoutes);
-app.use('/dependencies', dependencyRoutes);
+
 
 
 // Autenticación a la base de datos

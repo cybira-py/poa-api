@@ -13,13 +13,7 @@ export default (sequelize, DataTypes) => {
           key: 'id'
         }
       },
-      branchId: {
-        type: DataTypes.UUID,
-        references: {
-          model: 'branches',
-          key: 'id'
-        }
-      },
+      branchId: DataTypes.STRING,
       type: DataTypes.STRING,
       date: DataTypes.DATE,
       value: DataTypes.FLOAT
