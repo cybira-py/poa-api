@@ -5,7 +5,7 @@ import POA from './poa.js';
 import Objective from './objective.js';
 import Action from './action.js';
 import Indicator from './indicator.js';
-import UnitOfMeasurement from './unitOfMeasurement.js';
+import UnitOfMeasurement from './unit_of_measurement.js';
 import IndicatorMetadata from './indicatorMetadata.js';
 import IndicatorData from './indicatorData.js';
 import Project from './project.js';
